@@ -1,0 +1,28 @@
+{
+  "states": [
+    {
+      "pins": {
+        "digital": {
+          "1": false,
+          "2": true
+        },
+        "analog": {
+          "1": 123
+        }
+      },
+      "delayAfter": 1000 // ms
+    },
+    {
+      "pins": {
+        "digital": {
+          "1": false,
+          "2": true
+        },
+        "analog": {
+          "1": 123
+        }
+      },
+      "delayAfter": 1000 // ms
+    }
+  ]
+}
