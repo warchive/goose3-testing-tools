@@ -60,6 +60,7 @@ Widget::Widget(QWidget *parent) :
         args << output; // {1,0};{2,1};{3,0};...;{A15,123}
         proc.execute(/* /path/to/cli-prog */"echo", args);
         proc.close();
+
     });
     connect(ui->pushButton_2, &QPushButton::released, [this]() { // Check Output Button
         QString output;
@@ -75,6 +76,13 @@ Widget::Widget(QWidget *parent) :
         msgBox.setTextInteractionFlags(Qt::TextSelectableByMouse);
         msgBox.exec();
     });
+}
+
+void Widget::sendThroughSerialPort()
+{
+    bool portChanged = false;
+
+
 }
 
 inline void Widget::addDigital(const int& index, QFormLayout* layout) {

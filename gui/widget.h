@@ -25,6 +25,9 @@ private:
     QList<QSpinBox*> analogSpinBoxes;
     inline void addDigital(const int& index, QFormLayout* layout);
     inline void addAnalog(const int& index, QFormLayout* layout);
+    // Serial stuff
+    void sendThroughSerialPort();
+
 };
 
 #endif // WIDGET_H
