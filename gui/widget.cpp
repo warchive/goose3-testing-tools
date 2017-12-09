@@ -43,7 +43,7 @@ Widget::Widget(QWidget *parent) :
         addAnalog(i, analogLayout2);
     }
 
-    connect(ui->pushButton, &QPushButton::released, [this]() {
+    connect(ui->pushButton, &QPushButton::released, [this]() { // Send Button
         QString output;
         output.reserve(600);
         for (int i = 0; i < 55; ++i) {
@@ -59,7 +59,7 @@ Widget::Widget(QWidget *parent) :
         proc.execute(/* /path/to/cli-prog */"echo", args);
         proc.close();
     });
-    connect(ui->pushButton_2, &QPushButton::released, [this]() {
+    connect(ui->pushButton_2, &QPushButton::released, [this]() { // Check Output Button
         QString output;
         output.reserve(600);
         for (int i = 0; i < 55; ++i) {
