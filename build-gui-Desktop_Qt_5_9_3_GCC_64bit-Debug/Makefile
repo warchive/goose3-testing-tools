@@ -12,10 +12,10 @@ MAKEFILE      = Makefile
 
 CC            = gcc
 CXX           = g++
-DEFINES       = -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
+DEFINES       = -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_SERIALPORT_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g -Wall -W -D_REENTRANT -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -g -std=gnu++11 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
-INCPATH       = -I../gui -I. -I../../Qt/5.9.3/gcc_64/include -I../../Qt/5.9.3/gcc_64/include/QtWidgets -I../../Qt/5.9.3/gcc_64/include/QtGui -I../../Qt/5.9.3/gcc_64/include/QtCore -I. -isystem /usr/include/libdrm -I. -I../../Qt/5.9.3/gcc_64/mkspecs/linux-g++
+INCPATH       = -I../gui -I. -I../../Qt/5.9.3/gcc_64/include -I../../Qt/5.9.3/gcc_64/include/QtWidgets -I../../Qt/5.9.3/gcc_64/include/QtGui -I../../Qt/5.9.3/gcc_64/include/QtSerialPort -I../../Qt/5.9.3/gcc_64/include/QtCore -I. -isystem /usr/include/libdrm -I. -I../../Qt/5.9.3/gcc_64/mkspecs/linux-g++
 QMAKE         = /home/mathieu/Qt/5.9.3/gcc_64/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -38,7 +38,7 @@ DISTNAME      = gui1.0.0
 DISTDIR = /home/mathieu/goose3-testing-tools/build-gui-Desktop_Qt_5_9_3_GCC_64bit-Debug/.tmp/gui1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-rpath,/home/mathieu/Qt/5.9.3/gcc_64/lib
-LIBS          = $(SUBLIBS) -L/home/mathieu/Qt/5.9.3/gcc_64/lib -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread 
+LIBS          = $(SUBLIBS) -L/home/mathieu/Qt/5.9.3/gcc_64/lib -lQt5Widgets -lQt5Gui -lQt5SerialPort -lQt5Core -lGL -lpthread 
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -216,6 +216,7 @@ DIST          = ../../Qt/5.9.3/gcc_64/mkspecs/features/spec_pre.prf \
 		../../Qt/5.9.3/gcc_64/mkspecs/features/qt_config.prf \
 		../../Qt/5.9.3/gcc_64/mkspecs/linux-g++/qmake.conf \
 		../../Qt/5.9.3/gcc_64/mkspecs/features/spec_post.prf \
+		../gui/.qmake.stash \
 		../../Qt/5.9.3/gcc_64/mkspecs/features/exclusive_builds.prf \
 		../../Qt/5.9.3/gcc_64/mkspecs/features/toolchain.prf \
 		../../Qt/5.9.3/gcc_64/mkspecs/features/default_pre.prf \
@@ -409,6 +410,7 @@ Makefile: ../gui/gui.pro ../../Qt/5.9.3/gcc_64/mkspecs/linux-g++/qmake.conf ../.
 		../../Qt/5.9.3/gcc_64/mkspecs/features/qt_config.prf \
 		../../Qt/5.9.3/gcc_64/mkspecs/linux-g++/qmake.conf \
 		../../Qt/5.9.3/gcc_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		../../Qt/5.9.3/gcc_64/mkspecs/features/exclusive_builds.prf \
 		../../Qt/5.9.3/gcc_64/mkspecs/features/toolchain.prf \
 		../../Qt/5.9.3/gcc_64/mkspecs/features/default_pre.prf \
@@ -431,6 +433,7 @@ Makefile: ../gui/gui.pro ../../Qt/5.9.3/gcc_64/mkspecs/linux-g++/qmake.conf ../.
 		../gui/gui.pro \
 		../../Qt/5.9.3/gcc_64/lib/libQt5Widgets.prl \
 		../../Qt/5.9.3/gcc_64/lib/libQt5Gui.prl \
+		../../Qt/5.9.3/gcc_64/lib/libQt5SerialPort.prl \
 		../../Qt/5.9.3/gcc_64/lib/libQt5Core.prl
 	$(QMAKE) -o Makefile ../gui/gui.pro -spec linux-g++ CONFIG+=debug CONFIG+=qml_debug
 ../../Qt/5.9.3/gcc_64/mkspecs/features/spec_pre.prf:
@@ -594,6 +597,7 @@ Makefile: ../gui/gui.pro ../../Qt/5.9.3/gcc_64/mkspecs/linux-g++/qmake.conf ../.
 ../../Qt/5.9.3/gcc_64/mkspecs/features/qt_config.prf:
 ../../Qt/5.9.3/gcc_64/mkspecs/linux-g++/qmake.conf:
 ../../Qt/5.9.3/gcc_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 ../../Qt/5.9.3/gcc_64/mkspecs/features/exclusive_builds.prf:
 ../../Qt/5.9.3/gcc_64/mkspecs/features/toolchain.prf:
 ../../Qt/5.9.3/gcc_64/mkspecs/features/default_pre.prf:
@@ -616,6 +620,7 @@ Makefile: ../gui/gui.pro ../../Qt/5.9.3/gcc_64/mkspecs/linux-g++/qmake.conf ../.
 ../gui/gui.pro:
 ../../Qt/5.9.3/gcc_64/lib/libQt5Widgets.prl:
 ../../Qt/5.9.3/gcc_64/lib/libQt5Gui.prl:
+../../Qt/5.9.3/gcc_64/lib/libQt5SerialPort.prl:
 ../../Qt/5.9.3/gcc_64/lib/libQt5Core.prl:
 qmake: FORCE
 	@$(QMAKE) -o Makefile ../gui/gui.pro -spec linux-g++ CONFIG+=debug CONFIG+=qml_debug
@@ -789,7 +794,7 @@ moc_widget.cpp: ../../Qt/5.9.3/gcc_64/include/QtWidgets/QWidget \
 		../gui/widget.h \
 		moc_predefs.h \
 		../../Qt/5.9.3/gcc_64/bin/moc
-	/home/mathieu/Qt/5.9.3/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/mathieu/Qt/5.9.3/gcc_64/mkspecs/linux-g++ -I/home/mathieu/goose3-testing-tools/gui -I/home/mathieu/Qt/5.9.3/gcc_64/include -I/home/mathieu/Qt/5.9.3/gcc_64/include/QtWidgets -I/home/mathieu/Qt/5.9.3/gcc_64/include/QtGui -I/home/mathieu/Qt/5.9.3/gcc_64/include/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../gui/widget.h -o moc_widget.cpp
+	/home/mathieu/Qt/5.9.3/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/mathieu/Qt/5.9.3/gcc_64/mkspecs/linux-g++ -I/home/mathieu/goose3-testing-tools/gui -I/home/mathieu/Qt/5.9.3/gcc_64/include -I/home/mathieu/Qt/5.9.3/gcc_64/include/QtWidgets -I/home/mathieu/Qt/5.9.3/gcc_64/include/QtGui -I/home/mathieu/Qt/5.9.3/gcc_64/include/QtSerialPort -I/home/mathieu/Qt/5.9.3/gcc_64/include/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../gui/widget.h -o moc_widget.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -1056,6 +1061,41 @@ widget.o: ../gui/widget.cpp ../gui/widget.h \
 		../../Qt/5.9.3/gcc_64/include/QtWidgets/qboxlayout.h \
 		../../Qt/5.9.3/gcc_64/include/QtWidgets/qgridlayout.h \
 		ui_widget.h \
+		../../Qt/5.9.3/gcc_64/include/QtCore/QVariant \
+		../../Qt/5.9.3/gcc_64/include/QtWidgets/QAction \
+		../../Qt/5.9.3/gcc_64/include/QtWidgets/qaction.h \
+		../../Qt/5.9.3/gcc_64/include/QtWidgets/qactiongroup.h \
+		../../Qt/5.9.3/gcc_64/include/QtWidgets/QApplication \
+		../../Qt/5.9.3/gcc_64/include/QtWidgets/qapplication.h \
+		../../Qt/5.9.3/gcc_64/include/QtCore/qcoreapplication.h \
+		../../Qt/5.9.3/gcc_64/include/QtCore/qeventloop.h \
+		../../Qt/5.9.3/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		../../Qt/5.9.3/gcc_64/include/QtGui/qguiapplication.h \
+		../../Qt/5.9.3/gcc_64/include/QtGui/qinputmethod.h \
+		../../Qt/5.9.3/gcc_64/include/QtWidgets/QButtonGroup \
+		../../Qt/5.9.3/gcc_64/include/QtWidgets/qbuttongroup.h \
+		../../Qt/5.9.3/gcc_64/include/QtWidgets/QGridLayout \
+		../../Qt/5.9.3/gcc_64/include/QtWidgets/QHBoxLayout \
+		../../Qt/5.9.3/gcc_64/include/QtWidgets/QHeaderView \
+		../../Qt/5.9.3/gcc_64/include/QtWidgets/qheaderview.h \
+		../../Qt/5.9.3/gcc_64/include/QtWidgets/qabstractitemview.h \
+		../../Qt/5.9.3/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		../../Qt/5.9.3/gcc_64/include/QtWidgets/qframe.h \
+		../../Qt/5.9.3/gcc_64/include/QtCore/qabstractitemmodel.h \
+		../../Qt/5.9.3/gcc_64/include/QtCore/qitemselectionmodel.h \
+		../../Qt/5.9.3/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		../../Qt/5.9.3/gcc_64/include/QtWidgets/qstyleoption.h \
+		../../Qt/5.9.3/gcc_64/include/QtWidgets/qslider.h \
+		../../Qt/5.9.3/gcc_64/include/QtWidgets/qabstractslider.h \
+		../../Qt/5.9.3/gcc_64/include/QtWidgets/qstyle.h \
+		../../Qt/5.9.3/gcc_64/include/QtWidgets/qtabbar.h \
+		../../Qt/5.9.3/gcc_64/include/QtWidgets/qtabwidget.h \
+		../../Qt/5.9.3/gcc_64/include/QtWidgets/qrubberband.h \
+		../../Qt/5.9.3/gcc_64/include/QtWidgets/QPushButton \
+		../../Qt/5.9.3/gcc_64/include/QtWidgets/qpushbutton.h \
+		../../Qt/5.9.3/gcc_64/include/QtWidgets/QScrollArea \
+		../../Qt/5.9.3/gcc_64/include/QtWidgets/qscrollarea.h \
+		../../Qt/5.9.3/gcc_64/include/QtWidgets/QSpacerItem \
 		../../Qt/5.9.3/gcc_64/include/QtWidgets/QMessageBox \
 		../../Qt/5.9.3/gcc_64/include/QtWidgets/qmessagebox.h \
 		../../Qt/5.9.3/gcc_64/include/QtWidgets/qdialog.h \
@@ -1063,7 +1103,11 @@ widget.o: ../gui/widget.cpp ../gui/widget.h \
 		../../Qt/5.9.3/gcc_64/include/QtCore/qprocess.h \
 		../../Qt/5.9.3/gcc_64/include/QtWidgets/QLabel \
 		../../Qt/5.9.3/gcc_64/include/QtWidgets/qlabel.h \
-		../../Qt/5.9.3/gcc_64/include/QtWidgets/qframe.h
+		../../Qt/5.9.3/gcc_64/include/QtSerialPort/QSerialPort \
+		../../Qt/5.9.3/gcc_64/include/QtSerialPort/qserialport.h \
+		../../Qt/5.9.3/gcc_64/include/QtSerialPort/qserialportglobal.h \
+		../../Qt/5.9.3/gcc_64/include/QtSerialPort/QSerialPortInfo \
+		../../Qt/5.9.3/gcc_64/include/QtSerialPort/qserialportinfo.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o widget.o ../gui/widget.cpp
 
 moc_widget.o: moc_widget.cpp 

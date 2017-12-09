@@ -6,6 +6,8 @@
 #include <QCheckBox>
 #include <QSpinBox>
 #include <QLabel>
+#include <QtSerialPort/QSerialPort>
+#include <QtSerialPort/QSerialPortInfo>
 
 Widget::Widget(QWidget *parent) :
     QWidget(parent),
