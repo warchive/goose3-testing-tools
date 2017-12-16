@@ -206,7 +206,7 @@ _build_debug(){
     mkdir -p bin
     cd bin
     echo "Running QMake"
-    qmake -makefile -o Makefile "CONFIG+=debug" ../gui/gui.pro
+    qmake -makefile -o Makefile "CONFIG+=debug" ../testing-gui/testing-gui.pro
     echo "Running Make"
     make
     echo "gui Built"
@@ -217,7 +217,7 @@ _build_release(){
     mkdir -p bin
     cd bin
     echo "Running QMake"
-    qmake -makefile -o Makefile "CONFIG+=release" ../gui/gui.pro
+    qmake -makefile -o Makefile "CONFIG+=release" ../testing-gui/testing-gui.pro
     echo "Running Make"
     make
     echo "gui Built"

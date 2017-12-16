@@ -1,6 +1,6 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2017-11-25T16:55:22
+# Project created by QtCreator 2017-12-02T17:16:49
 #
 #-------------------------------------------------
 
@@ -8,7 +8,7 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = gui
+TARGET = testing-gui
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -25,10 +25,15 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        widget.cpp
+        mainwindow.cpp \
+    state.cpp \
+    editmodal.cpp
 
 HEADERS += \
-        widget.h
+        mainwindow.h \
+    state.h \
+    editmodal.h
 
 FORMS += \
-        widget.ui
+        mainwindow.ui \
+    editmodal.ui

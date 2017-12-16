@@ -1,30 +1,33 @@
-#ifndef WIDGET_H
-#define WIDGET_H
+#ifndef NEWTEST_H
+#define NEWTEST_H
 
-#include <QWidget>
+#include <QDialog>
 #include <QCheckBox>
 #include <QSpinBox>
-#include <QList>
 #include <QFormLayout>
+#include "state.h"
 
 namespace Ui {
-class Widget;
+class EditModal;
 }
 
-class Widget : public QWidget
+class EditModal : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit Widget(QWidget *parent = 0);
-    ~Widget();
+    explicit EditModal(QWidget *parent, State* state, bool loadState = false);
+    ~EditModal();
 
 private:
-    Ui::Widget *ui;
+    State* state;
+    Ui::EditModal *ui;
     QList<QCheckBox*> digitalCheckBoxes;
     QList<QSpinBox*> analogSpinBoxes;
     inline void addDigital(const int& index, QFormLayout* layout);
     inline void addAnalog(const int& index, QFormLayout* layout);
+public slots:
+    void resolve();
 };
 
-#endif // WIDGET_H
+#endif // NEWTEST_H
