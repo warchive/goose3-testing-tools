@@ -11,42 +11,128 @@
 import json
 
 
-def battery48(value):
-	# temporary values
-	if value > 0:
+# SENSOR FUNCTIONS ===============================================================
+
+# degrees celsius
+def battery_temp(value):
+	if value > 60:
 		return 1
-	else:
-		return -1
-
-
-def ESC_temp(value):
-	if -40 <= value < 120:
-		return 1
-	else:
-		return -1
-
-
-def motor_temp(value):
-	# temporary value
-	if value > 0:
-		return 1
-	else:
-		return -1
-
-
-def cooling_pump_flow_rate(value):
-	# temporary value
-	if value > 0:
-		return 1
-	else:
-		return -1
-
-
-def pressure_sensor(value):
-	if value > 250:
+	elif value < 5:
 		return -1
 	else:
+		return 0
+
+
+# degrees celsius
+def friction_drive_temp(value):
+	if value > 60:
 		return 1
+	elif value < 5:
+		return -1
+	else:
+		return 0
+
+
+# degrees celsius
+def ec_brake_temp(value):
+	if value > 60:
+		return 1
+	elif value < 5:
+		return -1
+	else:
+		return 0
+
+
+# degrees celsius
+def embedded_system_temp(value):
+	if value > 60:
+		return 1
+	elif value < 5:
+		return -1
+	else:
+		return 0
+
+
+# degrees celsius
+def esc_temp(value):
+	if value > 60:
+		return 1
+	elif value < 5:
+		return -1
+	else:
+		return 0
+
+
+# degrees celsius
+def liquid_cooling_temp(value):
+	if value > 125:
+		return 1
+	elif value < -40:
+		return -1
+	else:
+		return 0
+
+
+# volts
+def main_battery_current(value):
+	if value > 55:
+		return 1
+	elif value < 5:
+		return -1
+	else:
+		return 0
+
+
+def inclination(value):
+	return 0  # No values at the moment
+
+
+# degrees celsius
+def imu_front_temp(value):
+	if value > 60:
+		return 1
+	elif value < 5:
+		return -1
+	else:
+		return 0
+
+
+# degrees celsius
+def imu_back_temp(value):
+	if value > 60:
+		return 1
+	elif value < 5:
+		return -1
+	else:
+		return 0
+
+
+# gauss
+def imu_front_magnetic(value):
+	if value > 800:
+		return 1
+	elif value < 0:
+		return -1
+	else:
+		return 0
+
+
+# gauss
+def imu_back_magnetic(value):
+	if value > 800:
+		return 1
+	elif value < 0:
+		return -1
+	else:
+		return 0
+
+
+# millimetres
+def photoelectric_distance(value):
+	return 0  # no values at the moment
+
+
+# END OF SENSOR FUNCTIONS ==============================================================
 
 
 # Reads data from json file
@@ -66,11 +152,19 @@ def save_to_file(filename, data):
 # Calls the corresponding sensor function based on data input
 def sensor_handler(sensor, value):
 	return {
-		'battery48': battery48(value),
-		'ESCTemp': ESC_temp(value),
-		'motorTemp': motor_temp(value),
-		'coolingPumpFlowRate': cooling_pump_flow_rate(value),
-		'pressureSensor': pressure_sensor(value)
+		'batteryTemp': battery_temp(value),
+		'frictionDriveTemp': friction_drive_temp(value),
+		'ECBrakeTemp': ec_brake_temp(value),
+		'embeddedSystemTemp': embedded_system_temp(value),
+		'ESCTemp': esc_temp(value),
+		'liquidCoolingTemp': liquid_cooling_temp(value),
+		'mainBatteryCurrent': main_battery_current(value),
+		'inclinationSensor': inclination(value),
+		'IMUFrontTemp': imu_front_temp(value),
+		'IMUFrontMagnetic': imu_front_magnetic(value),
+		'IMUBackTemp': imu_back_temp(value),
+		'IMUBackMagnetic': imu_back_magnetic(value),
+		'photoelectricDistance': photoelectric_distance(value)
 	}.get(sensor, 0)
 
 

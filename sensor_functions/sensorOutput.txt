@@ -1,3 +1,4 @@
-battery48, 2, -50, 30, -1, 1
-ESCTemp, 3, 2, 20, 40, 1, 1, 1
-pressureSensor, 4, 200, 500, 40, 300, 1, -1, 1, -1
+batteryTemp, 2, -50, 30, -1, 0
+ESCTemp, 3, 2, 20, 40, -1, 0, 0
+mainBatteryCurrent, 4, 1, 40, 60, 25, -1, 0, 1, 0
+IMUBackTemp, 6, -2, 10, 30, 60, 70, 100, -1, 0, 0, 0, 1, 1
