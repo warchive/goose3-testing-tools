@@ -30,7 +30,7 @@ def battery_temp(value):
 # Component: motor
 # Units: degrees celsius
 def motor_temp(value):
-	if value > 60:
+	if value > 120:
 		return 1
 	elif value < 5:
 		return -1
@@ -42,7 +42,7 @@ def motor_temp(value):
 # Component: friction drive
 # Units: degrees celsius
 def friction_drive_temp(value):
-	if value > 60:
+	if value > 100:
 		return 1
 	elif value < 5:
 		return -1
@@ -78,12 +78,12 @@ def embedded_system_temp(value):
 # Component: ESC
 # Units: degrees celsius
 def esc_temp(value):
-	if value > 60:
+	if value > 100:
 		return 1
 	elif value < 5:
 		return -1
 	else:
-		return 0
+		return 0s
 
 
 # Type: temperature sensor
